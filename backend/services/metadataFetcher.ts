@@ -6,6 +6,7 @@ export const fetchMetadata = async (urls: string[]): Promise<Metadata[]>  => {
   const metadataResults = await Promise.all(
     urls.map(async (url: string) => {
       try {
+        console.log("Requesting site: ", url)
         const { data } = await axios.get(url);
         const $ = cheerio.load(data);
         const title = $('head title').text();
@@ -13,7 +14,8 @@ export const fetchMetadata = async (urls: string[]): Promise<Metadata[]>  => {
         const image = $('meta[property="og:image"]').attr('content') || '';
         return { title, description, image, isFailed: false, url: url};
       } catch (error) {
-        return { title: 'Failed to fetch', description: 'Error retrieving metadata', image: '', isFailed: false, url:url};
+        console.log("Failed to get information for: ", url)
+        return { title: 'Failed to fetch', description: 'Error retrieving metadata', image: '', isFailed: true, url:url};
       }
     })
   );

@@ -23,8 +23,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Defining app routes
-app.use('/api/metadata', metadataRoutes);
-
+app.use('/fetch-metadata', metadataRoutes);
 
 // Error handling middleware
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
@@ -33,7 +32,7 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

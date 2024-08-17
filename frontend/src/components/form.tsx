@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { FormResponse } from '../types/form';
+import FormResponse from '../types/form';
+import DisplayData from './displayData';
+import axiosInstance from '../services/axios';
 
 const UserForm = () => {
   const [urls, setUrls] = useState<string[]>(['', '', '']);
@@ -27,12 +29,12 @@ const UserForm = () => {
     setUrls(newVal)
 };
 
-  const handleSubmit = async (e: HTMLFormElement) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setError('');
     setMetadata([]);
     try {
-      const response = await axios.post('/fetch-metadata', { urls });
+      const response = await axiosInstance.post('/fetch-metadata', { urls });
       setMetadata(response.data);
     } catch (err) {
       setError('Failed to fetch metadata for one or more URLs');
@@ -69,7 +71,16 @@ const UserForm = () => {
           Submit
         </button>
       </form>
-
+        
+        {metadata.length > 0 ? 
+        <>
+            <DisplayData data={metadata}/>
+        </> 
+        :
+        <>
+            <p className='mt-2'>Still didn't request any sites</p>
+        </>}
+    
       {error && (
         <p className="mt-4 text-red-500">{error}</p>
       )}

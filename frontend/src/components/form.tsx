@@ -25,7 +25,7 @@ const UserForm = () => {
         alert("Minimun of 3 sites must be requested")
         return
     }
-    const newVal = urls.filter((v,i) => i !== urls.length - 1)
+    const newVal = urls.filter((_blank,i) => i !== urls.length - 1)
     setUrls(newVal)
 };
 

@@ -2,6 +2,9 @@ import express, { Request, Response, NextFunction } from 'express';
 import rateLimit from 'express-rate-limit';
 import cors from 'cors';
 import helmet from 'helmet';
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 // importing the routes
 import metadataRoutes from './routes/metadataRoutes';
@@ -32,7 +35,7 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

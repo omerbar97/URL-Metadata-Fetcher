@@ -4,6 +4,7 @@ type Metadata = {
     description: string;
     image: string;
     url: string;
+    isFailed: boolean
   }
   
 export default Metadata;

@@ -10,7 +10,6 @@ export const fetchMetadataController = async (req: Request, res: Response, next:
     }
     // Fetch metadata using the utility function
     const metadataResults = await fetchMetadata(urls);
-    // Send the response
     res.json(metadataResults);
   } catch (error) {
     next(error);

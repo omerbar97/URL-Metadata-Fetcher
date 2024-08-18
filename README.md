@@ -31,7 +31,6 @@ This project is a simple full-stack application that allows users to input a lis
 ### Prerequisites
 
 - Node.js installed (v16 or higher)
-- Environment variables setup
 
 ### Backend Setup
 

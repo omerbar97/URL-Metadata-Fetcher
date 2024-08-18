@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cors()); 
 app.use(helmet());
 
-// Defining the rate limit: max request 5 in timeframe of 1 seconds (1000ms)
+// defining the rate limit: max request 5 in timeframe of 1 seconds (1000ms)
 const limiter = rateLimit({
   windowMs: 1000, 
   max: 5,

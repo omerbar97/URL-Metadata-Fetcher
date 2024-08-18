@@ -36,10 +36,6 @@ app.use(limiter);
 // Defining app routes
 app.use('/fetch-metadata', metadataRoutes);
 
-app.get('/test', (_req, res) => {
-  res.send('Hey this is my API running 🥳 TESTING')
-})
-
 // Error handling middleware
 app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error(error);

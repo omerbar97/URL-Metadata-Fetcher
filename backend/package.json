@@ -8,7 +8,7 @@
     "start": "ts-node -r tsconfig-paths/register ./index.ts",
     "prod": "cross-env MODE=PRODUCTION ts-node -r tsconfig-paths/register ./dist/index.js",
     "dev": "nodemon index.ts",
-    "build": "tsc"
+    "build": "rm -r ./dist && tsc && cp -r ./dist ./public"
   },
   "keywords": [],
   "author": "",

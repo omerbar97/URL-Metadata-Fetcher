@@ -39,15 +39,28 @@ const fetchMetadata = async (urls) => {
     const metadataResults = await Promise.all(urls.map(async (url) => {
         try {
             console.log("Requesting site: ", url);
-            const { data } = await axios_1.default.get(prefixHttps(url));
+            const fixedUrl = prefixHttps(url);
+            const { data } = await axios_1.default.get(fixedUrl);
             const $ = cheerio.load(data);
             const title = $('head title').text();
             const description = $('meta[name="description"]').attr('content') || 'No description available';
-            const image = $('meta[property="og:image"]').attr('content') || '';
-            return { title, description, image, isFailed: false, url: url };
+            let image = $('meta[property="og:image"]').attr('content') || '';
+            if (image !== '') {
+                image = image.startsWith('http') ? image : new URL(image, fixedUrl).href;
+            }
+            else {
+                let favicon = $('link[rel="icon"]').attr('href') ||
+                    $('link[rel="shortcut icon"]').attr('href') ||
+                    $('link[rel="apple-touch-icon"]').attr('href') || '';
+                if (favicon && !favicon.startsWith('http')) {
+                    favicon = new URL(favicon, prefixHttps(url)).href;
+                }
+                image = favicon;
+            }
+            return { title, description, image, isFailed: false, url: fixedUrl };
         }
         catch (error) {
-            console.log("Failed to get information for: ", url);
+            console.log("Failed to get information for: ", url, " error: ", error);
             return { title: 'Failed to fetch', description: 'Error retrieving metadata', image: '', isFailed: true, url: url };
         }
     }));

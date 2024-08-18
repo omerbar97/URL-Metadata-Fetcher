@@ -24,7 +24,7 @@ This project is a simple full-stack application that allows users to input a lis
 
 - `frontend/`: Contains the Vite + React application
 - `backend/`: Contains the Node.js/Express server
-- `backend/test`: The test's case for the backend
+- `backend/__test__`: The test case's for the backend api
 
 ## Setup and Installation
 
@@ -45,3 +45,11 @@ This project is a simple full-stack application that allows users to input a lis
    Server will start at: http://localhost:3000/
    
    Also this will serve the static file of the frontend
+
+
+### Testing
+```bash
+    cd backend
+    npm run test
+```
+    This will run the 5 tests cases in the "./backend/__test__/testCases.test.ts" files

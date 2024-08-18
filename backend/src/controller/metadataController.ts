@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { fetchMetadata } from '@src/services/metadataFetcher';
+import { fetchMetadata } from '../services/metadataFetcher';
 
 export const fetchMetadataController = async (req: Request, res: Response, next: NextFunction) => {
   try {

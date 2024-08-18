@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { fetchMetadataController } from '@src/controller/metadataController';
+import { fetchMetadataController } from '../controller/metadataController';
 
 const router = Router();
 // Define the POST route for fetching metadata (can be called from the form)

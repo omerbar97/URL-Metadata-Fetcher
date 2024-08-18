@@ -33,7 +33,7 @@ const helmet_1 = __importDefault(require("helmet"));
 const dotenv = __importStar(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 dotenv.config();
-const metadataRoutes_1 = __importDefault(require("@src/routes/metadataRoutes"));
+const metadataRoutes_1 = __importDefault(require("./src/routes/metadataRoutes"));
 const app = (0, express_1.default)();
 app.use(express_1.default.static(path_1.default.join(__dirname, './public')));
 const WEB_URL = process.env.MODE === "PRODUCTION" ? process.env.VITE_SERVER_URL : "http://localhost:3000/";
@@ -46,7 +46,8 @@ app.use((0, helmet_1.default)());
 const limiter = (0, express_rate_limit_1.default)({
     windowMs: 1000,
     max: 5,
-    message: 'Too many requests from this IP, please try again later.'
+    message: 'Too many requests from this IP, please try again later.',
+    statusCode: 429
 });
 app.use(limiter);
 app.use('/fetch-metadata', metadataRoutes_1.default);
@@ -59,4 +60,4 @@ const PORT = mode !== 'PRODUCTION' ? 3000 : 443;
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT} Web url ${WEB_URL}`);
 });
-module.exports = app;
+exports.default = app;

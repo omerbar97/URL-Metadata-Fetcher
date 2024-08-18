@@ -36,6 +36,10 @@
       "src/**/*" // Include all files in the src directory
 , "index.ts", "index.ts"    ],
     "exclude": [
+        "./coverage", 
+        "./dist", 
+        "__tests__",
+        "jest.config.js",
       "node_modules", // Exclude the node_modules directory
       "**/*.spec.ts",
       "**/*.test.ts" // Exclude test files

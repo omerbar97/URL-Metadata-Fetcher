@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchMetadataController = void 0;
-const metadataFetcher_1 = require("@src/services/metadataFetcher");
+const metadataFetcher_1 = require("../services/metadataFetcher");
 const fetchMetadataController = async (req, res, next) => {
     try {
         const { urls } = req.body;

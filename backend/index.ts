@@ -9,10 +9,11 @@ import path from 'path';
 dotenv.config();
 
 // importing the routes
-import metadataRoutes from '@src/routes/metadataRoutes'
+import metadataRoutes from './src/routes/metadataRoutes'
 
 // Creating the app instance
 const app = express();
+
 // Serve static files from the Vite build directory
 app.use(express.static(path.join(__dirname, './public')));
 
@@ -29,7 +30,8 @@ app.use(helmet());
 const limiter = rateLimit({
   windowMs: 1000, 
   max: 5,
-  message: 'Too many requests from this IP, please try again later.'
+  message: 'Too many requests from this IP, please try again later.',
+  statusCode: 429
 });
 app.use(limiter);
 
@@ -42,6 +44,7 @@ app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).json({ message: 'Internal Server Error' });
 });
 
+
 // starting the server
 const mode = process.env.MODE
 const PORT = mode !== 'PRODUCTION' ? 3000 : 443;
@@ -49,4 +52,5 @@ app.listen(PORT, () => {
   console.log(`Server is running on ${PORT} Web url ${WEB_URL}`);
 });
 
-module.exports = app;
+
+export default app

@@ -10,6 +10,6 @@ export default defineConfig({
     'process.env': process.env
   },
   build: {
-    outDir: '../dist',
+    outDir: '../backend/public',
   },
 })

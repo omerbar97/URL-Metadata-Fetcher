@@ -3,24 +3,24 @@ import rateLimit from 'express-rate-limit';
 import cors from 'cors';
 import helmet from 'helmet';
 import * as dotenv from "dotenv";
-import metadataRoutes from '@src/routes/metadataRoutes'
+import path from 'path';
 
+// loading env
 dotenv.config();
 
 // importing the routes
-import path from 'path';
+import metadataRoutes from '@src/routes/metadataRoutes'
 
 // Creating the app instance
 const app = express();
 // Serve static files from the Vite build directory
-app.use(express.static(path.join(__dirname, '../../dist')));
+app.use(express.static(path.join(__dirname, './public')));
 
-// All data that will arive will be translated into json object
+
+// defining the middleware's
 app.use(express.json()); 
-// Cors is for Cross-Orgin (only accepting my site for request)
 app.use(cors()); 
 app.use(helmet());
-
 
 // Defining the rate limit: max request 5 in timeframe of 1 seconds (1000ms)
 const limiter = rateLimit({
@@ -30,10 +30,8 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-
 // Defining app routes
 app.use('/fetch-metadata', metadataRoutes);
-
 
 // Error handling middleware
 app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
@@ -41,8 +39,9 @@ app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(500).json({ message: 'Internal Server Error' });
 });
 
-// Start the server
-const PORT = process.env.PORT || 5001;
+// starting the server
+const mode = process.env.MODE
+const PORT = mode !== 'PRODUCTION' ? 3000 : 443;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

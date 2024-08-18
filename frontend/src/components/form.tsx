@@ -34,7 +34,7 @@ const UserForm = () => {
     setError('');
     setMetadata([]);
     try {
-      const response = await axiosInstance.post('/fetch-metadata', { urls });
+      const response = await axiosInstance.post('/api/fetch-metadata', { urls });
       setMetadata(response.data);
     } catch (err) {
       setError('Failed to fetch metadata for one or more URLs');

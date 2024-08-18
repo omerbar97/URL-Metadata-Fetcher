@@ -16,10 +16,13 @@ const app = express();
 // Serve static files from the Vite build directory
 app.use(express.static(path.join(__dirname, './public')));
 
-
+console.log(process.env.VITE_SERVER_URL)
 // defining the middleware's
 app.use(express.json()); 
-app.use(cors()); 
+app.use(cors({
+  origin: process.env.VITE_SERVER_URL,
+  methods:['GET', 'POST']
+})); 
 app.use(helmet());
 
 // defining the rate limit: max request 5 in timeframe of 1 seconds (1000ms)
@@ -31,7 +34,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Defining app routes
-app.use('/fetch-metadata', metadataRoutes);
+app.use('/api/fetch-metadata', metadataRoutes);
 
 // Error handling middleware
 app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {

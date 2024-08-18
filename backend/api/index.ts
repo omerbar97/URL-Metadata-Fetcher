@@ -16,11 +16,11 @@ const app = express();
 // Serve static files from the Vite build directory
 app.use(express.static(path.join(__dirname, './public')));
 
-console.log(process.env.VITE_SERVER_URL)
 // defining the middleware's
+const WEB_URL = process.env.MODE === "PRODUCTION" ? process.env.VITE_SERVER_UR : "http://localhost:3000/"
 app.use(express.json()); 
 app.use(cors({
-  origin: process.env.VITE_SERVER_URL,
+  origin: WEB_URL,
   methods:['GET', 'POST']
 })); 
 app.use(helmet());
@@ -46,5 +46,8 @@ app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
 const mode = process.env.MODE
 const PORT = mode !== 'PRODUCTION' ? 3000 : 443;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on ${PORT} Web url ${WEB_URL}`);
 });
+
+
+module.exports = app;

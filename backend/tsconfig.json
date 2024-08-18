@@ -34,7 +34,7 @@
     },
     "include": [
       "src/**/*" // Include all files in the src directory
-, "api/index.ts", "api/index.ts"    ],
+, "index.ts", "index.ts"    ],
     "exclude": [
       "node_modules", // Exclude the node_modules directory
       "**/*.spec.ts",

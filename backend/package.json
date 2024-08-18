@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node -r tsconfig-paths/register ./api/index.ts",
-    "prod": "cross-env MODE=PRODUCTION ts-node -r tsconfig-paths/register ./dist/api/index.js",
+    "start": "ts-node -r tsconfig-paths/register ./index.ts",
+    "prod": "cross-env MODE=PRODUCTION ts-node -r tsconfig-paths/register ./dist/index.js",
     "dev": "nodemon index.ts",
     "build": "tsc"
   },

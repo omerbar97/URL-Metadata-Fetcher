@@ -17,7 +17,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, './public')));
 
 // defining the middleware's
-const WEB_URL = process.env.MODE === "PRODUCTION" ? process.env.VITE_SERVER_UR : "http://localhost:3000/"
+const WEB_URL = process.env.MODE === "PRODUCTION" ? process.env.VITE_SERVER_URL : "http://localhost:3000/"
 app.use(express.json()); 
 app.use(cors({
   origin: WEB_URL,
@@ -34,7 +34,11 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Defining app routes
-app.use('/api/fetch-metadata', metadataRoutes);
+app.use('/fetch-metadata', metadataRoutes);
+
+app.get('/test', (_req, res) => {
+  res.send('Hey this is my API running 🥳 TESTING')
+})
 
 // Error handling middleware
 app.use((error: Error, _req: Request, res: Response, _next: NextFunction) => {
@@ -48,6 +52,5 @@ const PORT = mode !== 'PRODUCTION' ? 3000 : 443;
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT} Web url ${WEB_URL}`);
 });
-
 
 module.exports = app;

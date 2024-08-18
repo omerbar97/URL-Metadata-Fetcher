@@ -37,8 +37,8 @@ This project is a simple full-stack application that allows users to input a lis
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/omerbar97/Basic-Backend.git
-   cd Basic-Backend/backend
+   git clone https://github.com/omerbar97/URL-Metadata-Fetcher.git
+   cd URL-Metadata-Fetcher/backend
    npm install
    npm run start
    ```
